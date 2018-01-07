@@ -29,7 +29,7 @@ import it.sauronsoftware.jave.MultimediaInfo;
 import utils.C3P0Utils;
 
 public class Main {
-	// ÅäÖÃÎÄ¼şÊÓÆµÎÄ¼ş¼Ğ
+	// é…ç½®æ–‡ä»¶è§†é¢‘æ–‡ä»¶å¤¹
 	static String ROOT = "F:\\____temp";
 	static String BASEURL = "https://www.javbus.com/";
 
@@ -50,7 +50,7 @@ public class Main {
 				if (null!=info) {
 					System.out.println(num);
 					MultimediaInfo m = encoder.getInfo(file);
-					System.out.println("»ñÈ¡ÎÄ¼şĞÅÏ¢Íê³É,ÓÃÊ±"+(System.currentTimeMillis()-l)+"ºÁÃë");
+					System.out.println("è·å–æ–‡ä»¶ä¿¡æ¯å®Œæˆ,ç”¨æ—¶"+(System.currentTimeMillis()-l)+"æ¯«ç§’");
 
 					//System.out.println(JSON.toJSONString(info));
 					
@@ -65,7 +65,7 @@ public class Main {
 		
 	}
 	/**
-	 * ¸ù¾İ·¬ºÅ»ñÈ¡ĞÅÏ¢
+	 * æ ¹æ®ç•ªå·è·å–ä¿¡æ¯
 	 * @param num
 	 * @return
 	 * @throws Exception
@@ -80,11 +80,11 @@ public class Main {
 			doc = Jsoup.connect(BASEURL + num).get();
 
 			String title = doc.select("h3").text();
-			// ·âÃæ
+			// å°é¢
 			Elements mainimg = doc.select(".bigImage");
 			movie.setCover(mainimg.first().attr("href"));
 
-			// ½ØÍ¼
+			// æˆªå›¾
 			Elements Screenshot = doc.select(".sample-box");
 			List<String> previews = new ArrayList<String>();
 			for (Element element : Screenshot) {
@@ -92,39 +92,39 @@ public class Main {
 			}
 			movie.setPreviews(previews);
 
-			// ÓĞÃ»ÓĞÂë
+			// æœ‰æ²¡æœ‰ç 
 			Elements classificationElements = doc.select("li[class=active]");
 			String classification = classificationElements.text();
 			movie.setCensored(classification);
 
-			// ÏêÏ¸ĞÅÏ¢
+			// è¯¦ç»†ä¿¡æ¯
 			Elements info = doc.select(".info");
 			Elements infos = info.select("p");
 			for (int i = 0; i < infos.size(); i++) {
 				String header = infos.get(i).select(".header").text();
-				if ("×R„e´a:".equals(header)) {
+				if ("è­˜åˆ¥ç¢¼:".equals(header)) {
 					movie.setNum(infos.get(i).text().replaceAll(header + " ", ""));
 					title = title.replaceAll(movie.getNum(), "");
-				} else if ("°lĞĞÈÕÆÚ:".equals(header)) {
+				} else if ("ç™¼è¡Œæ—¥æœŸ:".equals(header)) {
 					movie.setRelease(infos.get(i).text().replaceAll(header + " ", ""));
-				} else if ("éL¶È:".equals(header)) {
+				} else if ("é•·åº¦:".equals(header)) {
 					movie.setRunTime(infos.get(i).text().replaceAll(header + " ", ""));
-				} else if ("Œ§Ñİ:".equals(header)) {
+				} else if ("å°æ¼”:".equals(header)) {
 					movie.setDirector(infos.get(i).text().replaceAll(header + " ", ""));
-				} else if ("Ñu×÷ÉÌ:".equals(header)) {
+				} else if ("è£½ä½œå•†:".equals(header)) {
 					movie.setStudio(infos.get(i).text().replaceAll(header + " ", ""));
-				} else if ("°lĞĞÉÌ:".equals(header)) {
+				} else if ("ç™¼è¡Œå•†:".equals(header)) {
 					movie.setLabel(infos.get(i).text().replaceAll(header + " ", ""));
-				} else if ("ÏµÁĞ:".equals(header)) {
+				} else if ("ç³»åˆ—:".equals(header)) {
 					movie.setSeries(infos.get(i).text().replaceAll(header + " ", ""));
-				} else if ("î„e:".equals(header) || "Ñİ†T".equals(header)) {
-					// System.err.println("ÌØÊâ×Ö¶Î");
+				} else if ("é¡åˆ¥:".equals(header) || "æ¼”å“¡".equals(header)) {
+					// System.err.println("ç‰¹æ®Šå­—æ®µ");
 				} else {
-					// System.err.println(header+"Î´Ê¶±ğµÄ×Ö¶Î");
+					// System.err.println(header+"æœªè¯†åˆ«çš„å­—æ®µ");
 				}
 			}
 
-			// Àà±ğ
+			// ç±»åˆ«
 			List<String> genres = new ArrayList<String>();
 			Elements select = infos.select(".genre");
 			for (Element element : select) {
@@ -134,7 +134,7 @@ public class Main {
 			}
 			movie.setGenres(genres);
 
-			// ÑİÔ±
+			// æ¼”å‘˜
 			List<Star> stars = new ArrayList<>();
 			Elements star = infos.select("span[onmouseover]");
 			
@@ -150,12 +150,12 @@ public class Main {
 			movie.setStars(stars);
 			movie.setTitle(title.trim());
 
-			//´ÅÁ´ĞÅÏ¢
+			//ç£é“¾ä¿¡æ¯
 			List<Magnet> magnets = getMagnets(doc,num);
 			movie.setMagnet(magnets);
 			return movie;
 		} catch (HttpStatusException e) {
-			System.out.println(num + "²»´æÔÚ");
+			System.out.println(num + "ä¸å­˜åœ¨");
 		}
 		return null;
 	}
@@ -166,31 +166,31 @@ public class Main {
 	
 	
 	/**
-	 * ½âÎö<script>±êÇ©»ñÈ¡varµÄ²ÎÊı
+	 * è§£æ<script>æ ‡ç­¾è·å–varçš„å‚æ•°
 	 * @param e
 	 * @return
 	 */
 	public static Map<String, String> getJsParams(Elements e) {
-		/* ÓÃí·âÑbÒª±£´æµÄ²ÎÊı */
+		/* ç”¨ä¾†å°è£è¦ä¿å­˜çš„å‚æ•° */
 		Map<String, String> map = new HashMap<String, String>();
 		for (Element element : e) {
 
-			/* È¡µÃJS±äÁ¿Êı×é */
+			/* å–å¾—JSå˜é‡æ•°ç»„ */
 			String[] data = element.data().toString().split("var");
 
-			/* È¡µÃµ¥¸öJS±äÁ¿ */
+			/* å–å¾—å•ä¸ªJSå˜é‡ */
 			for (String variable : data) {
 
-				/* ¹ıÂËvariableÎª¿ÕµÄÊı¾İ */
+				/* è¿‡æ»¤variableä¸ºç©ºçš„æ•°æ® */
 				if (variable.contains("=")) {
 
-					/* È¡µ½Âú×ãÌõ¼şµÄJS±äÁ¿ */
+					/* å–åˆ°æ»¡è¶³æ¡ä»¶çš„JSå˜é‡ */
 					if (variable.contains("gid") || variable.contains("uc") || variable.contains("color")
 							|| variable.contains("img")) {
 
 						String[] kvp = variable.split("=");
 
-						/* È¡µÃJS±äÁ¿´æÈëmap */
+						/* å–å¾—JSå˜é‡å­˜å…¥map */
 						if (!map.containsKey(kvp[0].trim()))
 							map.put(kvp[0].trim(), kvp[1].trim().substring(0, kvp[1].trim().length() - 1).toString());
 					}
@@ -202,7 +202,7 @@ public class Main {
 	}
 	
 	/**
-	 * ½âÎö´ÅÁ¦Á´½Ó
+	 * è§£æç£åŠ›é“¾æ¥
 	 * @param document
 	 * @return 
 	 * @throws IOException 
@@ -217,7 +217,7 @@ public class Main {
 		con.data(jsParams);
 		con.header("referer", BASEURL + num);
 		Document document = con.get();
-		// ´ÅÁ¦Á´½Ó
+		// ç£åŠ›é“¾æ¥
 		Elements magnets = document.select("a");
 		
 		Magnet magnet = new Magnet();
@@ -225,7 +225,7 @@ public class Main {
 		int index = 0;
 		
 		for (int i = 0; i < magnets.size(); i++) {
-			if (!"¸ßÇå".equals(magnets.get(i).text())) {
+			if (!"é«˜æ¸…".equals(magnets.get(i).text())) {
 				switch (index) {
 				case 0:
 					magnet.setMagnetTitle(magnets.get(i).text());
@@ -239,14 +239,14 @@ public class Main {
 					magnet.setMagnetData(magnets.get(i).text());
 					
 					index=0;
-					//²¹È«È±ÉÙµÄÖµ
+					//è¡¥å…¨ç¼ºå°‘çš„å€¼
 					magnet.setMagnetNum(num);
 					String magnetsUrl = magnets.get(i).attr("href");
 					magnet.setMagnetUrl(magnetsUrl.substring(0,(magnetsUrl.lastIndexOf("&")==-1)?magnetsUrl.length():magnetsUrl.lastIndexOf("&")));
-					//´æÆğÀ´
+					//å­˜èµ·æ¥
 					magnetList.add(magnet);
 					
-					//ÖØÖÃmagnet¶ÔÏó
+					//é‡ç½®magnetå¯¹è±¡
 					magnet=new Magnet();
 					break;
 				default:
@@ -260,7 +260,7 @@ public class Main {
 		return magnetList;
 	}
 	/**
-	 * »ñÈ¡ÑİÔ±ĞÅÏ¢...
+	 * è·å–æ¼”å‘˜ä¿¡æ¯...
 	 * @param StarUrl
 	 * @return 
 	 * @throws IOException 
@@ -281,36 +281,36 @@ public class Main {
 			} else {
 				String[] split = element.text().split(": ");
 				switch (split[0]) {
-				case "ÉúÈÕ":
+				case "ç”Ÿæ—¥":
 					star.setBirthday(split[1]);
 					break;
-				case "Äêıg":
+				case "å¹´é½¡":
 					star.setAge(split[1]);
 					break;
-				case "Éí¸ß":
+				case "èº«é«˜":
 					star.setHeight(split[1]);
 					break;
-				case "ÕÖ±­":
+				case "ç½©æ¯":
 					star.setCup(split[1]);
 					break;
-				case "ĞØ‡ú":
+				case "èƒ¸åœ":
 					star.setBust(split[1]);
 					break;
-				case "Ñü‡ú":
+				case "è…°åœ":
 					star.setWaist(split[1]);
 					break;
-				case "ÍÎ‡ú":
+				case "è‡€åœ":
 					star.setHips(split[1]);
 					break;
-				case "³öÉúµØ":
+				case "å‡ºç”Ÿåœ°":
 					star.setHometown(split[1]);
 					break;
-				case "ÛºÃ":
+				case "æ„›å¥½":
 					star.setHometown(split[1]);
 					break;
 				default:
 					System.err.println(StarUrl+":");
-					System.err.println("ÒâÁÏÖ®ÍâµÄ²ÎÊı:"+element.text());
+					System.err.println("æ„æ–™ä¹‹å¤–çš„å‚æ•°:"+element.text());
 					break;
 				}
 			}
@@ -319,44 +319,44 @@ public class Main {
 	}
 	
 	/**
-	 * ÏÂÔØÎÄ¼ş
-	 * @param urlString ÏÂÔØµÄÁ´½Ó
-	 * @param filename	±£´æµÄÎÄ¼şÃû
-	 * @param savePath	±£´æµÄÎ»ÖÃ
+	 * ä¸‹è½½æ–‡ä»¶
+	 * @param urlString ä¸‹è½½çš„é“¾æ¥
+	 * @param filename	ä¿å­˜çš„æ–‡ä»¶å
+	 * @param savePath	ä¿å­˜çš„ä½ç½®
 	 * @throws Exception
 	 */
 	public static void download(String urlString, String filename, String savePath) throws Exception {
-		// ¹¹ÔìURL
+		// æ„é€ URL
 		URL url = new URL(urlString);
-		// ´ò¿ªÁ¬½Ó
+		// æ‰“å¼€è¿æ¥
 		URLConnection con = url.openConnection();
-		// ÉèÖÃÇëÇó³¬Ê±Îª5s
+		// è®¾ç½®è¯·æ±‚è¶…æ—¶ä¸º5s
 		con.setConnectTimeout(5 * 1000);
 		con.setRequestProperty("User-agent","Mozilla/4.0");
-		// ÊäÈëÁ÷
+		// è¾“å…¥æµ
 		InputStream is = con.getInputStream();
 
-		// 1KµÄÊı¾İ»º³å
+		// 1Kçš„æ•°æ®ç¼“å†²
 		byte[] bs = new byte[1024];
-		// ¶ÁÈ¡µ½µÄÊı¾İ³¤¶È
+		// è¯»å–åˆ°çš„æ•°æ®é•¿åº¦
 		int len;
-		// Êä³öµÄÎÄ¼şÁ÷
+		// è¾“å‡ºçš„æ–‡ä»¶æµ
 		File sf = new File(savePath);
 		if (!sf.exists()) {
 			sf.mkdirs();
 		}
 		OutputStream os = new FileOutputStream(sf.getPath() + "\\" + filename);
-		// ¿ªÊ¼¶ÁÈ¡
+		// å¼€å§‹è¯»å–
 		while ((len = is.read(bs)) != -1) {
 			os.write(bs, 0, len);
 		}
-		// Íê±Ï£¬¹Ø±ÕËùÓĞÁ´½Ó
+		// å®Œæ¯•ï¼Œå…³é—­æ‰€æœ‰é“¾æ¥
 		os.close();
 		is.close();
 	}
 	
 	/**
-	 * ÒÆ¶¯ÎÄ¼ş,¹¹½¨ÎÄ¼ş¼Ğ,ÏÂÔØÍ¼Æ¬
+	 * ç§»åŠ¨æ–‡ä»¶,æ„å»ºæ–‡ä»¶å¤¹,ä¸‹è½½å›¾ç‰‡
 	 * @param info
 	 * @throws Exception 
 	 */
@@ -364,74 +364,74 @@ public class Main {
 		
 		String suffix = file.getName().substring(file.getName().lastIndexOf("."), file.getName().length());
 		
-		//ÓĞÂë,ÎŞÂë
+		//æœ‰ç ,æ— ç 
 		String censored = info.getCensored().replaceAll(":", "");
 		StringBuffer starsSb = new StringBuffer();
 		List<Star> stars = info.getStars();
 		for (Star star : stars) {
 			starsSb.append(star.getName()+",");
 		}
-		//ÑİÔ±Ãû,¶à¸ö
+		//æ¼”å‘˜å,å¤šä¸ª
 		String starsStr = starsSb.length()>0?starsSb.substring(0, starsSb.length()-1).replaceAll(":", "").replaceAll(" ", "").replaceAll("\\\\", ""):"";
-		//·¢ĞĞÈÕÆÚ
+		//å‘è¡Œæ—¥æœŸ
 		String release = info.getRelease().replaceAll(":", "").replaceAll(" ", "").replaceAll("\\\\", "");
-		//»ñÈ¡·¬ºÅ
+		//è·å–ç•ªå·
 		String num = info.getNum().replaceAll(":", "").replaceAll(" ", "").replaceAll("\\\\", "");
-		//·âÃæurl
+		//å°é¢url
 		String cover = info.getCover();
-		//Ô¤ÀÀÍ¼
+		//é¢„è§ˆå›¾
 		List<String> previews = info.getPreviews();
-		//´ÅÁ¦Á´½Ó
+		//ç£åŠ›é“¾æ¥
 		List<Magnet> magnets = info.getMagnet();
-		//Ó°Æ¬±êÌâ
-		String title = info.getTitle().replaceAll(":", "").replaceAll(" ", "").replaceAll("\\\\", "").replaceAll(":", "£º").replaceAll("\\*", "");
-		//·Ö±æÂÊĞÅÏ¢
+		//å½±ç‰‡æ ‡é¢˜
+		String title = info.getTitle().replaceAll(":", "").replaceAll(" ", "").replaceAll("\\\\", "").replaceAll(":", "ï¼š").replaceAll("\\*", "");
+		//åˆ†è¾¨ç‡ä¿¡æ¯
 		int height = 0;
 		if (null!=m.getVideo()&&null!=m.getVideo().getSize()) {
 			height = m.getVideo().getSize().getHeight();
 		}
-		//ÑİÔ±Ì«¶à,²»ÄÜÏÔÊ¾
+		//æ¼”å‘˜å¤ªå¤š,ä¸èƒ½æ˜¾ç¤º
 		if (starsStr.length()>=30) {
-			starsStr="ÈºĞÇ";
+			starsStr="ç¾¤æ˜Ÿ";
 		}
 		
-		//Æ´½ÓÂ·¾¶
-		String newFilePath = "F:/²»¿ÉÃèÊö"+"/"+censored+"/"+height+"P/"+starsStr+"/["+release+"]("+num+")"+starsStr+"-"+title+"/";
+		//æ‹¼æ¥è·¯å¾„
+		String newFilePath = "F:/ä¸å¯æè¿°"+"/"+censored+"/"+height+"P/"+starsStr+"/["+release+"]("+num+")"+starsStr+"-"+title+"/";
 		String newFileName  = "["+release+"]("+num+")"+starsStr+"-"+title;
-		//´´½¨ÎÄ¼ş¼Ğ
+		//åˆ›å»ºæ–‡ä»¶å¤¹
 		if (!new File(newFilePath).exists()) {
 			new File(newFilePath).mkdirs();
 		}
 		long l = System.currentTimeMillis();
-		//¸´ÖÆÓ°Æ¬
+		//å¤åˆ¶å½±ç‰‡
 		boolean b = file.renameTo(new File(newFilePath+newFileName+suffix));
 		if (!b) {
 			FileUtils.moveFile(file, new File(newFilePath+newFileName+suffix));
 		}	
-		System.out.println("ÎÄ¼ş¿½±´Íê³É,ÓÃÊ±"+(System.currentTimeMillis()-l)+"ºÁÃë");
+		System.out.println("æ–‡ä»¶æ‹·è´å®Œæˆ,ç”¨æ—¶"+(System.currentTimeMillis()-l)+"æ¯«ç§’");
 		
 		try {
 			l = System.currentTimeMillis();
-			//ÏÂÔØ·âÃæ
+			//ä¸‹è½½å°é¢
 			download(cover, "Cover" + cover.substring(cover.lastIndexOf("."), cover.length()), newFilePath);
-			System.out.println("·âÃæÏÂÔØÍê³É,ÓÃÊ±"+(System.currentTimeMillis()-l)+"ºÁÃë");
+			System.out.println("å°é¢ä¸‹è½½å®Œæˆ,ç”¨æ—¶"+(System.currentTimeMillis()-l)+"æ¯«ç§’");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("·âÃæÏÂÔØÊ§°Ü");
+			System.err.println("å°é¢ä¸‹è½½å¤±è´¥");
 		}
 		try {
 			l = System.currentTimeMillis();
-			//ÏÂÔØÔ¤ÀÀÍ¼
+			//ä¸‹è½½é¢„è§ˆå›¾
 			for (int i = 0; i < previews.size(); i++) {
 				download(previews.get(i),
 						newFileName + "." + i
 								+ previews.get(i).substring(previews.get(i).lastIndexOf("."), previews.get(i).length()),
 						newFilePath);
 			} 
-			System.out.println("Ô¤ÀÀÍ¼ÏÂÔØÍê³É,ÓÃÊ±"+(System.currentTimeMillis()-l)+"ºÁÃë");
+			System.out.println("é¢„è§ˆå›¾ä¸‹è½½å®Œæˆ,ç”¨æ—¶"+(System.currentTimeMillis()-l)+"æ¯«ç§’");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("Ô¤ÀÀÍ¼ÏÂÔØÊ§°Ü");
+			System.err.println("é¢„è§ˆå›¾ä¸‹è½½å¤±è´¥");
 		}
 		try {
 			l = System.currentTimeMillis();
@@ -439,18 +439,18 @@ public class Main {
 			for (int i = 0; i < magnets.size(); i++) {
 				Magnet magnet = magnets.get(i);
 				String magnetinfo = magnet.getMagnetUrl() + "\t" + magnet.getMagnetSize() + "\t"
-						+ magnet.getMagnetData() + "\t" + (magnet.getIsHD() ? "¸ßÇå" : "\t") + "\t"
+						+ magnet.getMagnetData() + "\t" + (magnet.getIsHD() ? "é«˜æ¸…" : "\t") + "\t"
 						+ magnet.getMagnetTitle() + "\n";
 				FileUtils.writeStringToFile(magnetText, magnetinfo, "utf-8", true);
 			} 
-			System.out.println("´ÅÁ´±£´æÍê³É,ÓÃÊ±"+(System.currentTimeMillis()-l)+"ºÁÃë");
+			System.out.println("ç£é“¾ä¿å­˜å®Œæˆ,ç”¨æ—¶"+(System.currentTimeMillis()-l)+"æ¯«ç§’");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("´ÅÁ´±£´æÊ§°Ü");
+			System.err.println("ç£é“¾ä¿å­˜å¤±è´¥");
 		}
 	}
 	/**
-	 * Êı¾İ±£´æµ½Êı¾İ¿â
+	 * æ•°æ®ä¿å­˜åˆ°æ•°æ®åº“
 	 * @param movieinfo
 	 * @param fileinfo
 	 * @throws Exception 
@@ -494,7 +494,7 @@ public class Main {
 				+previews+"','"
 				+movieinfo.getSeries()+"', '"
 				+magnets+"','"
-				+fileinfo.getDuration()/60000+"·ÖçŠ',' "
+				+fileinfo.getDuration()/60000+"åˆ†é˜',' "
 				+fileinfo.getFormat()+"',' "
 				+width+"',' "
 				+height+"',' "

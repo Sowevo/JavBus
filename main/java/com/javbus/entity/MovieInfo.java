@@ -4,240 +4,240 @@ import java.util.List;
 
 public class MovieInfo {
 	/**
-	 * ÓĞÃ»ÓĞÂë
+	 * æœ‰æ²¡æœ‰ç 
 	 */
 	String censored;
 	/**
-	 * ·¬ºÅ
+	 * ç•ªå·
 	 */
 	String num;
 	/**
-	 * ±êÌâ
+	 * æ ‡é¢˜
 	 */
 	String title;
 	/**
-	 * ·¢ĞĞÈÕÆÚ
+	 * å‘è¡Œæ—¥æœŸ
 	 */
 	String release;
 	/**
-	 * Ó°Æ¬³¤¶È
+	 * å½±ç‰‡é•¿åº¦
 	 */
 	String runTime;
 	/**
-	 * ÑİÔ±
+	 * æ¼”å‘˜
 	 */
 	List<Star> stars;
 	/**
-	 * µ¼Ñİ
+	 * å¯¼æ¼”
 	 */
 	String director;
 	/**
-	 * ÖÆ×÷ÉÌ
+	 * åˆ¶ä½œå•†
 	 */
 	String studio;
 	/**
-	 * ·¢ĞĞÉÌ
+	 * å‘è¡Œå•†
 	 */
 	String label;
 	/**
-	 * Àà±ğ
+	 * ç±»åˆ«
 	 */
 	List<String> genres;
 	/**
-	 * ·âÃæ
+	 * å°é¢
 	 */
 	String cover;
 	/**
-	 * Ô¤ÀÀÍ¼
+	 * é¢„è§ˆå›¾
 	 */
 	List<String> Previews;
 	/**
-	 * ÏµÁĞ
+	 * ç³»åˆ—
 	 */
 	String series;
 	
 
 	/**
-	 * ´ÅÁ¦Á´½Ó
+	 * ç£åŠ›é“¾æ¥
 	 */
 	List<Magnet> magnet;
 	/**
-	 * »ñÈ¡·¬ºÅ
+	 * è·å–ç•ªå·
 	 * @return
 	 */
 	public String getNum() {
 		return num;
 	}
 	/**
-	 * ÉèÖÃ·¬ºÅ
+	 * è®¾ç½®ç•ªå·
 	 * @param num
 	 */
 	public void setNum(String num) {
 		this.num = num;
 	}
 	/**
-	 * »ñÈ¡±êÌâ
+	 * è·å–æ ‡é¢˜
 	 * @return
 	 */
 	public String getTitle() {
 		return title;
 	}
 	/**
-	 * ÉèÖÃ±êÌâ
+	 * è®¾ç½®æ ‡é¢˜
 	 * @param title
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	/**
-	 * »ñÈ¡·¢ĞĞÈÕÆÚ
+	 * è·å–å‘è¡Œæ—¥æœŸ
 	 * @return
 	 */
 	public String getRelease() {
 		return release;
 	}
 	/**
-	 * ÉèÖÃ·¢ĞĞÈÕÆÚ
+	 * è®¾ç½®å‘è¡Œæ—¥æœŸ
 	 * @param release
 	 */
 	public void setRelease(String release) {
 		this.release = release;
 	}
 	/**
-	 * »ñÈ¡Ê±³¤
+	 * è·å–æ—¶é•¿
 	 * @return
 	 */
 	public String getRunTime() {
 		return runTime;
 	}
 	/**
-	 * ÉèÖÃÊ±³¤
+	 * è®¾ç½®æ—¶é•¿
 	 * @param runTime
 	 */
 	public void setRunTime(String runTime) {
 		this.runTime = runTime;
 	}
 	/**
-	 * »ñÈ¡ÑİÔ±
+	 * è·å–æ¼”å‘˜
 	 * @return
 	 */
 	public List<Star> getStars() {
 		return stars;
 	}
 	/**
-	 * ÉèÖÃÑİÔ±
+	 * è®¾ç½®æ¼”å‘˜
 	 * @param stars
 	 */
 	public void setStars(List<Star> stars) {
 		this.stars = stars;
 	}
 	/**
-	 * »ñÈ¡µ¼Ñİ
+	 * è·å–å¯¼æ¼”
 	 * @return
 	 */
 	public String getDirector() {
 		return director;
 	}
 	/**
-	 * ÉèÖÃµ¼Ñİ
+	 * è®¾ç½®å¯¼æ¼”
 	 * @param director
 	 */
 	public void setDirector(String director) {
 		this.director = director;
 	}
 	/**
-	 * »ñÈ¡ÖÆ×÷ÉÌ
+	 * è·å–åˆ¶ä½œå•†
 	 * @return
 	 */
 	public String getStudio() {
 		return studio;
 	}
 	/**
-	 * ÖÆ×÷ÉÌ
+	 * åˆ¶ä½œå•†
 	 * @param studio
 	 */
 	public void setStudio(String studio) {
 		this.studio = studio;
 	}
 	/**
-	 * »ñÈ¡·¢ĞĞÉÌ
+	 * è·å–å‘è¡Œå•†
 	 * @return
 	 */
 	public String getLabel() {
 		return label;
 	}
 	/**
-	 * ·¢ĞĞÉÌ
+	 * å‘è¡Œå•†
 	 * @param label
 	 */
 	public void setLabel(String label) {
 		this.label = label;
 	}
 	/**
-	 * »ñÈ¡Àà±ğ
+	 * è·å–ç±»åˆ«
 	 * @return
 	 */
 	public List<String> getGenres() {
 		return genres;
 	}
 	/**
-	 * ÉèÖÃÀà±ğ
+	 * è®¾ç½®ç±»åˆ«
 	 * @param genres
 	 */
 	public void setGenres(List<String> genres) {
 		this.genres = genres;
 	}
 	/**
-	 * »ñÈ¡·âÃæ
+	 * è·å–å°é¢
 	 * @return
 	 */
 	public String getCover() {
 		return cover;
 	}
 	/**
-	 * ÉèÖÃ·âÃæ
+	 * è®¾ç½®å°é¢
 	 * @param cover
 	 */
 	public void setCover(String cover) {
 		this.cover = cover;
 	}
 	/**
-	 * »ñÈ¡Ô¤ÀÀÍ¼
+	 * è·å–é¢„è§ˆå›¾
 	 * @return
 	 */
 	public List<String> getPreviews() {
 		return Previews;
 	}
 	/**
-	 * ÉèÖÃÔ¤ÀÀÍ¼
+	 * è®¾ç½®é¢„è§ˆå›¾
 	 * @param previewss
 	 */
 	public void setPreviews(List<String> previews) {
 		Previews = previews;
 	}
 	/**
-	 * »ñÈ¡´ÅÁ¦Á´½Ó
+	 * è·å–ç£åŠ›é“¾æ¥
 	 * @return
 	 */
 	public List<Magnet> getMagnet() {
 		return magnet;
 	}
 	/**
-	 * ÉèÖÃ´ÅÁ¦Á´½Ó
+	 * è®¾ç½®ç£åŠ›é“¾æ¥
 	 * @param magnet
 	 */
 	public void setMagnet(List<Magnet> magnet) {
 		this.magnet = magnet;
 	}
 	/**
-	 * ÓĞÃ»ÓĞÂë
+	 * æœ‰æ²¡æœ‰ç 
 	 * @return
 	 */
 	public String getCensored() {
 		return censored;
 	}
 	/**
-	 * ÓĞÃ»ÓĞÂë
+	 * æœ‰æ²¡æœ‰ç 
 	 * @param censored
 	 */
 	public void setCensored(String censored) {

@@ -2,47 +2,47 @@ package com.javbus.entity;
 
 public class Star {
 	/**
-	 * Ãû×Ö
+	 * åå­—
 	 */
 	String name ;
 	/**
-	 * ÉúÈÕ
+	 * ç”Ÿæ—¥
 	 */
 	String birthday;
 	/**
-	 * ÄêÁä
+	 * å¹´é¾„
 	 */
 	String age;
 	/**
-	 * Éí¸ß
+	 * èº«é«˜
 	 */
 	String height;
 	/**
-	 * ÕÖ±­
+	 * ç½©æ¯
 	 */
 	String cup;
 	/**
-	 * ĞØÎ§
+	 * èƒ¸å›´
 	 */
 	String bust;
 	/**
-	 * ÑüÎ§
+	 * è…°å›´
 	 */
 	String waist;
 	/**
-	 * ÍÎÎ§
+	 * è‡€å›´
 	 */
 	String hips;
 	/**
-	 * ³öÉúµØ
+	 * å‡ºç”Ÿåœ°
 	 */
 	String hometown;
 	/**
-	 * Í·Ïñ
+	 * å¤´åƒ
 	 */
 	String image;
 	/**
-	 * °®ºÃ
+	 * çˆ±å¥½
 	 */
 	String hobby;
 	public String getHobby() {
@@ -82,42 +82,42 @@ public class Star {
 		this.cup = cup;
 	}
 	/**
-	 * ĞØÎ§
+	 * èƒ¸å›´
 	 * @return
 	 */
 	public String getBust() {
 		return bust;
 	}
 	/**
-	 * ĞØÎ§
+	 * èƒ¸å›´
 	 * @param bust
 	 */
 	public void setBust(String bust) {
 		this.bust = bust;
 	}
 	/**
-	 * ÑüÎ§
+	 * è…°å›´
 	 * @return
 	 */
 	public String getWaist() {
 		return waist;
 	}
 	/**
-	 * ÑüÎ§
+	 * è…°å›´
 	 * @param waist
 	 */
 	public void setWaist(String waist) {
 		this.waist = waist;
 	}
 	/**
-	 * ÍÎÎ§
+	 * è‡€å›´
 	 * @return
 	 */
 	public String getHips() {
 		return hips;
 	}
 	/**
-	 * ÍÎÎ§
+	 * è‡€å›´
 	 * @param hips
 	 */
 	public void setHips(String hips) {
