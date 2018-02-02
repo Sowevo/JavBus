@@ -413,7 +413,7 @@ public class Main {
 		try {
 			l = System.currentTimeMillis();
 			//下载封面
-			download(cover, "Cover" + cover.substring(cover.lastIndexOf("."), cover.length()), newFilePath);
+			download(cover, "cover" + cover.substring(cover.lastIndexOf("."), cover.length()), newFilePath);
 			System.out.println("封面下载完成,用时"+(System.currentTimeMillis()-l)+"毫秒");
 		} catch (Exception e) {
 			e.printStackTrace();
