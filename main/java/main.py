@@ -110,7 +110,7 @@ for video in videos:
 	stars = STARS.split(",")
 	actor = str(stars).replace("'","\"")
 
-	WRITER = [];
+	WRITER = []
 	STUDIO = movieInfo['STUDIO']
 	LABEL = movieInfo['LABEL']
 	if STUDIO!='null':
@@ -120,7 +120,7 @@ for video in videos:
 	writer = str(WRITER).replace("'","\"").replace(" ","")
 
 	DIRECTOR = movieInfo['DIRECTOR']
-	directors = [];
+	directors = []
 	if DIRECTOR!='null':
 		directors.append(DIRECTOR)
 	directors.append(" ")
